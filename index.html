@@ -6,7 +6,7 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 		/>
-		<title>a-cite</title>
+		<title>azref</title>
 		<!-- Barlow (main font) and Libre Baskerville (accent font), used in src/slides.css -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,22 +40,24 @@
 					</div>
 				</section>
 
-				<section class="big-statement">
+				<!-- The words come in on their own; data-autoslide is the wait in ms before the next
+				     step (on the section: before the first), and 0 stops so anything after, and
+				     leaving the slide, wait for a key press. Same on the next slide -->
+				<section class="big-statement" data-autoslide="500">
 					<p class="big-statement-label">Students (and we) want:</p>
 					<h2>
-						<span class="fragment">Clean.</span>
-						<span class="fragment">Responsive.</span>
-						<span class="fragment">Accessible.</span>
+						<span class="fragment" data-autoslide="500">Clean.</span>
+						<span class="fragment" data-autoslide="500">Responsive.</span>
+						<span class="fragment" data-autoslide="0">Accessible.</span>
 					</h2>
-					<p class="fragment">So we tried making something that is.</p>
-					<aside class="notes">Dynamic pages · responsive layouts · accessibility as foundational</aside>
+					<p class="fragment" data-autoslide="0">So we tried making something that is.</p>
 				</section>
 
-				<section class="big-statement">
+				<section class="big-statement" data-autoslide="500">
 					<p class="big-statement-label">Which meant making something that was:</p>
 					<h2>
-						<span>Evidence based.</span>
-						<span>User-centric.</span>
+						<span class="fragment" data-autoslide="500">Evidence based.</span>
+						<span class="fragment" data-autoslide="0">User-centric.</span>
 					</h2>
 				</section>
 
@@ -119,10 +121,6 @@
 							Source types × citation/referencing mechanics (% of each source
 							type's queries)
 						</p>
-						<aside class="notes">
-							Also: report × corporate author ≈ 38% (26 of 68), from the sources × author variations
-							heatmap.
-						</aside>
 					</section>
 				</section>
 

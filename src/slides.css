@@ -283,6 +283,17 @@
 .reveal .drag-box:active {
 	cursor: grabbing;
 }
+/* Hidden until the slide's page has loaded (or a few seconds have passed), then fades in;
+   src/drag.js sets the classes */
+.reveal .drag-box {
+	transition:
+		opacity var(--fragment-fade),
+		visibility var(--fragment-fade);
+}
+.reveal .drag-slide:not(.page-loaded):not(.page-waited) .drag-box {
+	opacity: 0;
+	visibility: hidden;
+}
 /* A fragment in a box takes no space until it appears, so the box grows to fit it rather
    than holding a blank line. The fade is an animation because a transition doesn't run
    when an element goes from display: none to shown */

@@ -4,6 +4,48 @@
 // kept inside the viewport so they can't be lost off-screen.
 const MIN_FONT_PX = 12;
 
+// Each box waits for its slide's page to finish loading, then fades in (.page-loaded in
+// slides.css), so it doesn't sit over a blank page; if the page is slow or never loads,
+// the box shows anyway after a few seconds on the slide. Call before Reveal.initialize,
+// so no page load is missed.
+const PAGE_WAIT_MS = 5000;
+
+export function boxesWaitForPages(deck) {
+	const loaded = new WeakSet();
+	const update = () => {
+		if (!deck.isReady()) return;
+		document.querySelectorAll('.drag-slide').forEach((slide) => {
+			const frame = deck.getSlideBackground(slide)?.querySelector('iframe');
+			slide.classList.toggle('page-loaded', Boolean(frame && loaded.has(frame)));
+		});
+	};
+
+	// load doesn't bubble, so listen in the capture phase. reveal empties a page (removes
+	// its src) when the slide is far away, which loads about:blank: that's not loaded
+	document.addEventListener(
+		'load',
+		(event) => {
+			const frame = event.target;
+			if (!(frame instanceof HTMLIFrameElement)) return;
+			if (frame.getAttribute('src')) loaded.add(frame);
+			else loaded.delete(frame);
+			update();
+		},
+		true
+	);
+
+	const waitOn = (slide) => {
+		if (slide?.classList.contains('drag-slide')) {
+			setTimeout(() => slide.classList.add('page-waited'), PAGE_WAIT_MS);
+		}
+	};
+	deck.on('ready', ({ currentSlide }) => {
+		update();
+		waitOn(currentSlide);
+	});
+	deck.on('slidechanged', ({ currentSlide }) => waitOn(currentSlide));
+}
+
 export function initDragBoxes(deck) {
 	document.querySelectorAll('.drag-box').forEach((box) => {
 		const handle = box.appendChild(document.createElement('span'));

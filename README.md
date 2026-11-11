@@ -1,4 +1,4 @@
-# a-cite
+# azref
 
 A [reveal.js](https://revealjs.com/) presentation, served and built with [Vite](https://vite.dev/).
 

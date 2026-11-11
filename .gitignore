@@ -1,0 +1,7 @@
+node_modules/
+dist/
+
+# Local reference material and notes, kept out of the public repo
+ref_viz.html
+ref-v-all_viz.html
+CLAUDE.md

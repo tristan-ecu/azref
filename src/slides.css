@@ -1,0 +1,362 @@
+/*
+ * Fonts (loaded from Google Fonts in index.html). Barlow replaces the theme's font for
+ * body text and headings; Libre Baskerville is an accent font, applied with .accent-font.
+ */
+:root {
+	--r-main-font: 'Barlow', Helvetica, sans-serif;
+	--r-heading-font: 'Barlow', Helvetica, sans-serif;
+	/* Headings as written (sentence case) rather than the theme's capitals */
+	--r-heading-text-transform: none;
+}
+/* Sets the theme's font variables as well, so headings inside the element switch too */
+.reveal .accent-font {
+	--r-main-font: 'Libre Baskerville', Georgia, serif;
+	--r-heading-font: 'Libre Baskerville', Georgia, serif;
+	font-family: var(--r-main-font);
+}
+
+/* The teal accent: progress bar and controls, and the drag boxes' offset block and label bar */
+:root {
+	--accent: #26b298;
+}
+/* Progress bar and control arrows in the accent (the theme uses its link colour) */
+.reveal .controls,
+.reveal .progress {
+	color: var(--accent);
+}
+
+/*
+ * Slide margins. The canvas is 1280×720 with no outer margin, like the slides.com
+ * templates (src/main.js), so every slide gets Basel's 80px side margins here. Stacks of
+ * vertical slides are skipped, or the slides inside them would get the margin twice.
+ */
+.reveal .slides section:not(.stack) {
+	box-sizing: border-box;
+	padding: 0 80px;
+}
+
+/*
+ * Chart slides: details column on the left, chart on the right, caption along the
+ * bottom, at the column widths and type sizes of #/5 of the Basel template. reveal
+ * centres each slide's content vertically. Layout only; styling is still to do.
+ */
+.reveal .slides section.chart-slide {
+	/* Shared by the grid and the caption, which lines up with the chart column */
+	--split-gap: 40px;
+}
+
+/* reveal.js sets display inline on <section>, so the grid lives on a wrapper */
+.reveal .split {
+	display: grid;
+	/* 360px and 720px across the 1120px between the margins, as in Basel */
+	grid-template-columns: 1fr 2fr;
+	gap: var(--split-gap);
+	/* The details column centres on the chart */
+	align-items: center;
+	text-align: left;
+}
+
+/* Basel's type sizes on this slide: label 14px, body 17px, headline 51px, stat 45px */
+.reveal .split-details {
+	font-size: 17px;
+}
+.reveal .split-details h2 {
+	font-size: 51px;
+	line-height: 1.04;
+}
+.reveal .split-label {
+	font-size: 14px;
+	margin: 0 0 0.5em;
+}
+.reveal .split-details hr {
+	border: 0;
+	border-top: 3px solid currentColor;
+	margin: 40px 0 20px;
+}
+.reveal .split-stat {
+	font-size: 45px;
+	font-weight: 700;
+	line-height: 1;
+	margin: 0;
+}
+
+.reveal .split-chart {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+/* Chart.js sizes the canvas to this box; with the legend it makes about Basel's 540px */
+.reveal .chart-canvas {
+	position: relative;
+	height: 510px;
+}
+
+/* Basel's footer size (12px), 20px below the chart. Centred on the chart's plot area:
+   past the details column (1fr of 1fr 2fr) and the gap, then the chart's own insets,
+   which src/charts.js sets */
+.reveal .split-caption {
+	font-size: 12px;
+	text-align: center;
+	margin: 20px 0 0;
+	padding: 0 var(--plot-right, 0px) 0
+		calc((100% - var(--split-gap)) / 3 + var(--split-gap) + var(--plot-left, 0px));
+}
+.reveal .legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	font-size: 12px;
+	margin: 0 0 10px;
+	/* Centred on the chart's plot area, not the whole column; src/charts.js sets the insets */
+	justify-content: center;
+	padding: 0 var(--plot-right, 0px) 0 var(--plot-left, 0px);
+}
+.reveal .swatch {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+.reveal .swatch.zero {
+	outline: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Heatmap table (built by src/charts.js) */
+.reveal table.heatmap {
+	width: 100%;
+	table-layout: fixed;
+	margin: 0;
+	font-size: 12px;
+}
+.reveal table.heatmap th,
+.reveal table.heatmap td {
+	border: 0;
+	padding: 4px 2px;
+	text-align: center;
+}
+.reveal table.heatmap .row-label {
+	text-align: right;
+	font-weight: 400;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-right: 6px;
+}
+.reveal table.heatmap thead .row-label {
+	width: 150px;
+}
+/* Tall enough for the longest label at -30° (it rises about half its length) */
+.reveal table.heatmap .col-header {
+	position: relative;
+	height: 60px;
+	padding: 0;
+	vertical-align: bottom;
+}
+/* Rotated so eight column labels fit across */
+.reveal table.heatmap .col-header > span {
+	position: absolute;
+	bottom: 4px;
+	left: 50%;
+	transform-origin: 0 100%;
+	transform: rotate(-30deg);
+	white-space: nowrap;
+	font-weight: 400;
+	line-height: 1;
+}
+.reveal table.heatmap .n {
+	line-height: 1.1;
+}
+.reveal table.heatmap .p {
+	font-size: 9px;
+	line-height: 1.1;
+	opacity: 0.75;
+}
+
+/*
+ * Quote slide: oversized quotation mark, quote, attribution beneath
+ * (after #/6 of the Lumen template). Layout only; styling is still to do.
+ */
+.reveal .quote {
+	margin: 0;
+	text-align: left;
+}
+/* Clip the box to the glyph so the quote tucks in under the mark */
+.reveal .quote-mark {
+	font-size: 4em;
+	line-height: 1;
+	height: 0.45em;
+}
+/* Undo the theme's boxed, centred, italic blockquote */
+.reveal .quote blockquote {
+	width: auto;
+	margin: 0;
+	padding: 0;
+	background: none;
+	box-shadow: none;
+	font-style: normal;
+	font-size: 1.2em;
+	line-height: 1.04;
+}
+.reveal .quote p {
+	margin: 0;
+	line-height: inherit;
+}
+.reveal .quote figcaption {
+	margin-top: 2em;
+	font-size: 0.5em;
+}
+
+/*
+ * Statement slide: one large left-aligned line set high on the slide
+ * (after #/2 of the Basel template). Layout only; styling is still to do.
+ */
+/* Full height, so reveal's vertical centring leaves the line up top, where Basel has it */
+.reveal .slides > section.statement {
+	height: 100%;
+	text-align: left;
+}
+.reveal .statement h2 {
+	/* Basel's headline sits at y 190 */
+	margin-top: 190px;
+	/* About where the line would wrap by itself; the <br> in index.html makes sure it does.
+	   Two lines at this size end about 76px above the bottom of the slide */
+	font-size: 240px;
+	line-height: 0.95;
+}
+
+/*
+ * Big-statement slides: a short lead-in, then one short line after another in very large
+ * type, left-aligned (after #/2 and #/5 of the Lumen template). reveal centres the block
+ * vertically. Layout only; styling is still to do.
+ */
+.reveal .slides section.big-statement {
+	text-align: left;
+}
+.reveal .big-statement-label {
+	font-size: 30px;
+	margin: 0 0 16px;
+}
+.reveal .big-statement h2 {
+	/* Near Lumen's size; "Evidence based." would wrap from about 150px */
+	font-size: 140px;
+	font-weight: 700;
+	line-height: 0.95;
+	margin: 0 0 30px;
+}
+/* One line each */
+.reveal .big-statement h2 > span {
+	display: block;
+}
+
+/*
+ * Draggable, resizable box over an interactive iframe background (behaviour: src/drag.js).
+ * Layout only; styling is still to do.
+ */
+/* Full height, so reveal's vertical centring leaves the slide at the top and box positions stay put */
+.reveal .slides > section.drag-slide {
+	height: 100%;
+}
+.reveal .drag-box {
+	position: absolute;
+	top: 500px;
+	left: 40px;
+	/* Sized to its text, so it doesn't narrow and rewrap as it's dragged towards the right
+	   edge, and resizing (which scales the text) scales the box too */
+	width: max-content;
+	max-width: 100%;
+	min-width: 4em;
+	box-sizing: border-box;
+	/* Starting size: everything in the box is in em, so this scales all of it (and
+	   resizing the box changes it) */
+	font-size: 0.75em;
+	padding: 0.4em 0.8em;
+	text-align: left;
+	background: var(--r-background-color);
+	/* A solid block of the accent offset behind the box (after #/8 of the Form template);
+	   square corners, like all the templates' shapes */
+	box-shadow: 0.33em 0.33em 0 var(--accent);
+	cursor: grab;
+	user-select: none;
+	touch-action: none;
+}
+.reveal .drag-box:active {
+	cursor: grabbing;
+}
+/* A fragment in a box takes no space until it appears, so the box grows to fit it rather
+   than holding a blank line. The fade is an animation because a transition doesn't run
+   when an element goes from display: none to shown */
+.reveal .drag-box .fragment:not(.visible) {
+	display: none;
+}
+.reveal .drag-box .fragment.visible {
+	animation: drag-box-fade-in var(--fragment-fade) ease;
+}
+@keyframes drag-box-fade-in {
+	from {
+		opacity: 0;
+	}
+}
+/* Small label over a large title (after #/3 of Lumen), with a short bar before the label
+   (after #/2 of Form) */
+.reveal .drag-box-label {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	font-size: 0.55em;
+}
+.reveal .drag-box-label::before {
+	content: '';
+	width: 1.5em;
+	height: 0.18em;
+	background: var(--accent);
+}
+.reveal .drag-box-title {
+	font-size: 1.6em;
+	font-weight: 700;
+	line-height: 1.05;
+}
+/* As the A-Z Referencing page sets its own subtitle: italic, right-aligned under the
+   title (the font comes from .accent-font) */
+.reveal .drag-box-subtitle {
+	font-size: 0.7em;
+	font-style: italic;
+	text-align: right;
+	margin-top: 0.2em;
+}
+/* Resize grip in the bottom-right corner (added by src/drag.js) */
+.reveal .drag-box-resize {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 20px;
+	height: 20px;
+	box-sizing: border-box;
+	border-right: 3px solid currentColor;
+	border-bottom: 3px solid currentColor;
+	cursor: nwse-resize;
+}
+/* reveal turns pointer events off on interactive-background slides so clicks reach the page;
+   turn them back on for the box, on the current slide only */
+.reveal .slides > section.present .drag-box {
+	pointer-events: auto;
+}
+/* While dragging or resizing, keep the page from taking over the pointer */
+.drag-box-active iframe {
+	pointer-events: none;
+}
+/* src/iframe-focus.js focuses the deck to take the keyboard back from a page; no outline */
+.reveal:focus {
+	outline: none;
+}
+
+/*
+ * Fragments fade in more slowly than reveal's 0.2s default. Fragments in a drag box
+ * use an animation instead (see above) but share this duration.
+ */
+.reveal {
+	--fragment-fade: 0.6s;
+}
+.reveal .fragment {
+	transition-duration: var(--fragment-fade);
+}

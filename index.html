@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		/>
+		<title>a-cite</title>
+		<!-- Barlow (main font) and Libre Baskerville (accent font), used in src/slides.css -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400&amp;family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;display=swap"
+		/>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section
+					class="drag-slide"
+					data-background-iframe="https://ecu.au.libguides.com/referencing/home"
+					data-background-interactive
+				>
+					<div class="drag-box" data-prevent-swipe>
+						So, we take them to the LibGuides...
+						<div class="fragment">but this isn't how students (or we) really reference.</div>
+					</div>
+				</section>
+
+				<section
+					class="drag-slide"
+					data-background-iframe="https://www.google.com/?igu=1"
+					data-background-interactive
+				>
+					<div class="drag-box" data-prevent-swipe>
+						We might try apa.org or the manual...
+						<div class="fragment">Student might try citation generator or chatbots.</div>
+					</div>
+				</section>
+
+				<section class="big-statement">
+					<p class="big-statement-label">Students (and we) want:</p>
+					<h2>
+						<span class="fragment">Clean.</span>
+						<span class="fragment">Responsive.</span>
+						<span class="fragment">Accessible.</span>
+					</h2>
+					<p class="fragment">So we tried making something that is.</p>
+					<aside class="notes">Dynamic pages · responsive layouts · accessibility as foundational</aside>
+				</section>
+
+				<section class="big-statement">
+					<p class="big-statement-label">Which meant making something that was:</p>
+					<h2>
+						<span>Evidence based.</span>
+						<span>User-centric.</span>
+					</h2>
+				</section>
+
+				<section>
+					<section class="chart-slide">
+						<div class="split">
+							<div class="split-details">
+								<h2>It's not the journal articles.</h2>
+								<hr />
+								<p class="split-stat">~20%</p>
+								<p>of queries involve a report.</p>
+								<p>
+									Referencing reports isn't typically emphasised vs. journal articles, books etc.
+								</p>
+							</div>
+							<div class="split-chart">
+								<div class="legend">
+									<span><span class="swatch" style="background: #14aa90"></span>source type</span>
+									<span><span class="swatch" style="background: #c13284"></span>special application</span>
+								</div>
+								<div class="chart-canvas">
+									<canvas
+										id="chart-sources"
+										role="img"
+										aria-label="Top 10 source types and special applications by number of queries"
+									></canvas>
+								</div>
+							</div>
+						</div>
+						<p class="split-caption">Top 10 source types + special applications</p>
+					</section>
+
+					<section class="chart-slide">
+						<div class="split">
+							<div class="split-details">
+								<h2>It's really not the journal articles.</h2>
+								<hr />
+								<p class="split-stat">~70–80%</p>
+								<p>
+									of chapter in edited book and edited book queries involve end-text referencing.
+								</p>
+								<p style="margin-bottom: 0;">Also:</p>
+								<ul>
+									<li>Report × end-text: ~50%</li>
+									<li>List check: ~20%</li>
+								</ul>
+							</div>
+							<div class="split-chart">
+								<div class="legend">
+									<span><span class="swatch zero"></span>0%</span>
+									<span><span class="swatch" style="background: #025749"></span>1–10%</span>
+									<span><span class="swatch" style="background: #017462"></span>11–25%</span>
+									<span><span class="swatch" style="background: #03a38a"></span>26–40%</span>
+									<span><span class="swatch" style="background: #50d0b5"></span>41–55%</span>
+									<span><span class="swatch" style="background: #c2f0e3"></span>56%+</span>
+								</div>
+								<table class="heatmap" id="heatmap-mechanics"></table>
+							</div>
+						</div>
+						<p class="split-caption">
+							Source types × citation/referencing mechanics (% of each source
+							type's queries)
+						</p>
+						<aside class="notes">
+							Also: report × corporate author ≈ 38% (26 of 68), from the sources × author variations
+							heatmap.
+						</aside>
+					</section>
+				</section>
+
+				<section
+					class="drag-slide"
+					data-background-iframe="https://ecu.au.libguides.com/az/databases"
+					data-background-interactive
+				>
+					<!-- Starts higher than the default so all four lines fit on the slide -->
+					<div class="drag-box" data-prevent-swipe style="top: 340px">
+						<div>LibGuides' A-Z Lists:</div>
+						<ul>
+							<li>Already used</li>
+							<li>Clean UI & search functionality</li>
+							<li>Easily maintainable & customisable</li>
+						</ul>
+					</div>
+				</section>
+
+				<section
+					class="drag-slide"
+					data-background-iframe="https://ecu.au.libguides.com/az/referencing"
+					data-background-interactive
+				>
+					<div class="drag-box" data-prevent-swipe>
+						<div class="drag-box-label">Presenting</div>
+						<div class="drag-box-title">A-Z Referencing</div>
+						<div class="drag-box-subtitle accent-font">for APA Style</div>
+					</div>
+				</section>
+
+				<section class="statement">
+					<h2>Next<br />steps.</h2>
+				</section>
+
+				<section>
+					<figure class="quote">
+						<div class="quote-mark" aria-hidden="true">“</div>
+						<blockquote>
+							<p>
+								[We should] design educational methodologies that match the task environment, and that
+								requires addressing the world we see
+							</p>
+						</blockquote>
+						<figcaption>
+							Mike Caulfield<br />
+							<span class="quote-role"
+								>Research scientist at the University of Washington &amp; creator of SIFT</span
+							>
+						</figcaption>
+					</figure>
+				</section>
+			</div>
+		</div>
+
+		<script type="module" src="/src/main.js"></script>
+	</body>
+</html>

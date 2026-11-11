@@ -163,6 +163,9 @@ export function initCharts(deck) {
 		});
 	rescale();
 	deck.on('resize', rescale);
+	// reveal's resize event only fires when its scale changes; moving the window to a screen
+	// with different display scaling can change the pixel ratio alone
+	window.addEventListener('resize', rescale);
 	// Nor does it redraw when a web font arrives, so redraw once the font has loaded
 	document.fonts.load(`1em ${font}`).then(() => charts.forEach((chart) => chart.update('none')));
 

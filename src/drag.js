@@ -47,22 +47,32 @@ export function boxesWaitForPages(deck) {
 }
 
 export function initDragBoxes(deck) {
+	// Reveal lays the slide out again on a window resize before this listener runs
+	measureWindow(deck);
+	window.addEventListener('resize', () => measureWindow(deck));
+
 	document.querySelectorAll('.drag-box').forEach((box) => {
 		const handle = box.appendChild(document.createElement('span'));
 		handle.className = 'drag-box-resize';
 
 		let start;
-		const remember = () =>
-			(start = {
+		const remember = () => {
+			// Boxes start anchored to the window's bottom-left corner (slides.css); once moved
+			// or resized, a box is held by its top-left corner and stays where it's put
+			box.style.left = `${box.offsetLeft}px`;
+			box.style.top = `${box.offsetTop}px`;
+			box.style.bottom = 'auto';
+			start = {
 				left: box.offsetLeft,
 				top: box.offsetTop,
 				width: box.offsetWidth,
 				height: box.offsetHeight,
 				fontSize: parseFloat(getComputedStyle(box).fontSize),
-			});
+			};
+		};
 
 		trackPointer(box, remember, (dx, dy) => {
-			const b = bounds(deck, box);
+			const b = bounds(deck, box.offsetParent);
 			box.style.left = `${clamp(start.left + dx / b.scale, b.left, b.right - box.offsetWidth)}px`;
 			box.style.top = `${clamp(start.top + dy / b.scale, b.top, b.bottom - box.offsetHeight)}px`;
 		});
@@ -71,7 +81,7 @@ export function initDragBoxes(deck) {
 		// nothing rewraps. The corner follows the pointer along the box's diagonal, as in a
 		// slide editor, and stops where the box would leave the viewport
 		trackPointer(handle, remember, (dx, dy) => {
-			const b = bounds(deck, box);
+			const b = bounds(deck, box.offsetParent);
 			const { width: w, height: h } = start;
 			const grow = 1 + (dx * w + dy * h) / b.scale / (w * w + h * h);
 			const most = Math.min((b.right - start.left) / w, (b.bottom - start.top) / h);
@@ -113,10 +123,19 @@ function trackPointer(element, onStart, onMove) {
 	element.addEventListener('pointercancel', stop);
 }
 
-// The viewport's edges in the coordinates of the box's slide, plus reveal's scale
-function bounds(deck, box) {
+// How far the browser window reaches past the slide's left and bottom edges, in slide
+// pixels, for the boxes' starting position in slides.css. Zero in a 16:9 window
+function measureWindow(deck) {
+	const slides = deck.getSlidesElement();
+	const b = bounds(deck, slides);
+	slides.style.setProperty('--window-past-left', `${-b.left}px`);
+	slides.style.setProperty('--window-past-bottom', `${b.bottom - slides.offsetHeight}px`);
+}
+
+// The viewport's edges in the coordinates of a slide, plus reveal's scale
+function bounds(deck, slideElement) {
 	const scale = deck.getScale();
-	const slide = box.offsetParent.getBoundingClientRect();
+	const slide = slideElement.getBoundingClientRect();
 	const view = deck.getViewportElement().getBoundingClientRect();
 	return {
 		scale,

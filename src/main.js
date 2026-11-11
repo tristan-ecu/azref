@@ -13,10 +13,13 @@ import './slides.css';
 import { initCharts } from './charts.js';
 import { boxesWaitForPages, initDragBoxes } from './drag.js';
 import { keepKeyboardOnDeck } from './iframe-focus.js';
+import { zoomPagesWithSlides } from './page-zoom.js';
 
 // Before initialize, so they hear every background iframe load
 keepKeyboardOnDeck(Reveal);
 boxesWaitForPages(Reveal);
+// Background pages zoom with the slides (remove this line to roll back)
+zoomPagesWithSlides(Reveal);
 
 // Config reference: https://revealjs.com/config/
 Reveal.initialize({
@@ -26,6 +29,9 @@ Reveal.initialize({
 	width: 1280,
 	height: 720,
 	margin: 0,
+	// Enlarge the slides to fill any window. reveal stops at 2× (2560×1440) by default,
+	// short of a 4K screen at 100% display scaling
+	maxScale: 10,
 	// Slides that step through their fragments on their own (data-autoslide) keep going
 	// after a key press, instead of pausing until A is pressed
 	autoSlideStoppable: false,

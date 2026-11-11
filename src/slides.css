@@ -259,8 +259,11 @@
 }
 .reveal .drag-box {
 	position: absolute;
-	top: 500px;
-	left: 40px;
+	/* Starts 100px in from the browser window's bottom-left corner. The slide keeps its 16:9
+	   shape, so in a window of another shape the window reaches past it; src/drag.js sets how
+	   far. Anchored at the bottom, the box grows upwards as its fragments appear */
+	left: calc(100px - var(--window-past-left, 0px));
+	bottom: calc(100px - var(--window-past-bottom, 0px));
 	/* Sized to its text, so it doesn't narrow and rewrap as it's dragged towards the right
 	   edge, and resizing (which scales the text) scales the box too */
 	width: max-content;
@@ -355,6 +358,17 @@
 /* While dragging or resizing, keep the page from taking over the pointer */
 .drag-box-active iframe {
 	pointer-events: none;
+}
+/* The pages zoom with the slides: laid out smaller or larger than the window, then scaled
+   to fill it (src/page-zoom.js sets --page-zoom). reveal sizes these iframes inline, hence
+   !important. Without --page-zoom this has no effect */
+.reveal .slide-background-content iframe {
+	width: calc(100% / var(--page-zoom, 1)) !important;
+	height: calc(100% / var(--page-zoom, 1)) !important;
+	max-width: none !important;
+	max-height: none !important;
+	transform: scale(var(--page-zoom, 1));
+	transform-origin: 0 0;
 }
 /* src/iframe-focus.js focuses the deck to take the keyboard back from a page; no outline */
 .reveal:focus {

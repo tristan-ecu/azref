@@ -18,13 +18,23 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+				<!-- The embed player: YouTube's watch page (youtube.com/watch?v=AUwGB2IO5o8) refuses
+				     to load in a frame -->
+				<section
+					class="drag-slide"
+					data-background-iframe="https://www.youtube.com/embed/AUwGB2IO5o8"
+					data-background-interactive
+				>
+					<div class="drag-box" data-prevent-swipe>A student asks you "How do I reference this?"</div>
+				</section>
+
 				<section
 					class="drag-slide"
 					data-background-iframe="https://ecu.au.libguides.com/referencing/home"
 					data-background-interactive
 				>
 					<div class="drag-box" data-prevent-swipe>
-						So, we take them to the LibGuides...
+						Standard protocol: take them to the LibGuides...
 						<div class="fragment">but this isn't how students (or we) really reference.</div>
 					</div>
 				</section>
@@ -35,8 +45,9 @@
 					data-background-interactive
 				>
 					<div class="drag-box" data-prevent-swipe>
-						We might try apa.org or the manual...
-						<div class="fragment">Student might try citation generator or chatbots.</div>
+						We might try apa.org...
+						<div class="fragment">Students might try AI chatbots...</div>
+						<div class="fragment">We'll both try "Ctrl+F Stlye"</div>
 					</div>
 				</section>
 
@@ -54,10 +65,10 @@
 				</section>
 
 				<section class="big-statement" data-autoslide="500">
-					<p class="big-statement-label">Which meant making something that was:</p>
+					<p class="big-statement-label">Which meant:</p>
 					<h2>
 						<span class="fragment" data-autoslide="500">Evidence based.</span>
-						<span class="fragment" data-autoslide="0">User-centric.</span>
+						<span class="fragment" data-autoslide="0">User-first.</span>
 					</h2>
 				</section>
 
@@ -129,8 +140,7 @@
 					data-background-iframe="https://ecu.au.libguides.com/az/databases"
 					data-background-interactive
 				>
-					<!-- Starts higher than the default so all four lines fit on the slide -->
-					<div class="drag-box" data-prevent-swipe style="top: 340px">
+					<div class="drag-box" data-prevent-swipe>
 						<div>LibGuides' A-Z Lists:</div>
 						<ul>
 							<li>Already used</li>
